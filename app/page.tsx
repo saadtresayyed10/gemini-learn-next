@@ -11,6 +11,7 @@ const HomePage = () => {
     <div className="flex items-center flex-col w-full min-h-screen lg:gap-y-10 p-20">
       {RenderForm()}
       {RenderMessage()}
+      {JSON.stringify(messages)}
     </div>
   );
 
