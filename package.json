@@ -14,7 +14,7 @@
     "dompurify": "^3.2.1",
     "lucide-react": "^0.462.0",
     "markdown-it": "^14.1.0",
-    "next": "14.2.5",
+    "next": "14.2.9",
     "react": "^18",
     "react-dom": "^18"
   },
