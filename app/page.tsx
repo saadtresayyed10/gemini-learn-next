@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "ai/react";
-import { Send } from "lucide-react";
+import { Bot, Send, User2 } from "lucide-react";
 
 const HomePage = () => {
   const { messages, input, handleInputChange, handleSubmit } = useChat({
@@ -11,7 +11,6 @@ const HomePage = () => {
     <div className="flex items-center flex-col w-full min-h-screen lg:gap-y-10 p-20">
       {RenderForm()}
       {RenderMessage()}
-      {JSON.stringify(messages)}
     </div>
   );
 
@@ -46,7 +45,24 @@ const HomePage = () => {
   }
 
   function RenderMessage() {
-    return <div></div>;
+    return (
+      <div className="flex flex-col-reverse w-full text-left mt-4 gap-4 whitespace-pre-wrap">
+        {messages.map((m, idx) => (
+          <div
+            className={`p-4 shadow-md rounded-md ml-10 relative ${
+              m.role === "user" ? "bg-stone-300" : ""
+            }`}
+          >
+            {m.content}
+            {m.role === "user" ? (
+              <User2 className="absolute top-2 -left-10 border rounded-full p-1 shadow-lg h-8 w-8" />
+            ) : (
+              <Bot className="absolute top-2 -left-10 border rounded-full p-1 shadow-lg text-purple-700 h-8 w-8" />
+            )}
+          </div>
+        ))}
+      </div>
+    );
   }
 };
 
