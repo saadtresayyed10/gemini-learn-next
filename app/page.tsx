@@ -1,12 +1,13 @@
 "use client";
 
 import { useChat } from "ai/react";
-import { Bot, Send, User2 } from "lucide-react";
+import { Bot, Loader2, Send, User2 } from "lucide-react";
 
 const HomePage = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "api/genai",
-  });
+  const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
+    useChat({
+      api: "api/genai",
+    });
   return (
     <div className="flex items-center flex-col w-full min-h-screen lg:gap-y-10 p-20">
       {RenderForm()}
@@ -31,14 +32,22 @@ const HomePage = () => {
           value={input}
           onChange={handleInputChange}
           type="text"
-          placeholder="Ask me something..."
-          className="border-b border-dashed outline-none w-full px-2 py-4 text-purple-700 placeholder:text-purple-300 focus:placeholder-transparent"
+          placeholder={isLoading ? "Generating..." : "Ask me something..."}
+          disabled={isLoading}
+          className="border-b border-dashed outline-none w-full px-2 py-4 text-purple-700 placeholder:text-purple-300 focus:placeholder-transparent disabled:bg-transparent"
         />
         <button
           type="submit"
           className="flex flex-row rounded-full shadow-md border"
         >
-          <Send className="stroke-stone-500 p-3 h-10 w-10" />
+          {isLoading ? (
+            <Loader2
+              onClick={stop}
+              className="stroke-stone-500 p-3 h-10 w-10 animate-spin"
+            />
+          ) : (
+            <Send className="stroke-stone-500 p-3 h-10 w-10" />
+          )}
         </button>
       </form>
     );
