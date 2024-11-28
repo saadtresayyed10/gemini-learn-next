@@ -2,6 +2,7 @@
 
 import { useChat } from "ai/react";
 import { Bot, Loader2, Send, User2 } from "lucide-react";
+import Markdown from "./component/markdown";
 
 const HomePage = () => {
   const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
@@ -58,11 +59,12 @@ const HomePage = () => {
       <div className="flex flex-col-reverse w-full text-left mt-4 gap-4 whitespace-pre-wrap">
         {messages.map((m, idx) => (
           <div
+            key={idx}
             className={`p-4 shadow-md rounded-md ml-10 relative ${
               m.role === "user" ? "bg-stone-300" : ""
             }`}
           >
-            {m.content}
+            <Markdown text={m.content} />
             {m.role === "user" ? (
               <User2 className="absolute top-2 -left-10 border rounded-full p-1 shadow-lg h-8 w-8" />
             ) : (
